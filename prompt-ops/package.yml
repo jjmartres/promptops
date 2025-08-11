@@ -1,3 +1,281 @@
 matches:
-  - trigger: ":test"
-    replace: "this is a test"
+  - trigger: ":tf-module-craft"
+    form: |
+      ## **CONTEXT** 🏢
+      You are designing cloud infrastructure for a **regulated fintech company** that processes financial transactions and customer data. This system must achieve:
+      - **99.9% uptime SLA** (8.76 hours downtime/year max)
+      - **Enterprise-grade security** with audit trails
+      - **Compliance requirements**: SOC2 Type II, PCI DSS Level 1, and potential HIPAA
+      - **Multi-environment deployment** pipeline with automated testing
+      - **Cost optimization** while maintaining performance and security standards
+
+      The client operates in a heavily regulated environment where security breaches or downtime can result in significant financial penalties and regulatory action.
+
+      ## **ROLE** 👨‍💼
+      Act as a **Senior Cloud Infrastructure Architect** with:
+      - **10+ years of Google Cloud Platform** expertise
+      - **FinTech industry specialization** with regulatory compliance experience
+      - **Terraform Infrastructure-as-Code** mastery
+      - **Multi-region, high-availability** system design experience
+      - **Security-first architecture** approach with zero-trust principles
+
+      ## **FORMAT** 📋
+      Deliver your response in exactly this structure:
+      - One HCL file per resource kind, prefixed with r- for resource, k0- for Kubernetes
+      - One file for provider configuration
+      - One file for variables
+      - One file for outputs
+      - One file for versions
+      - Budget constraints
+
+      ## **TONE** 🎨
+      - **Professional and authoritative**: Demonstrate deep technical expertise
+      - **Security-conscious**: Emphasize security-first approach in all decisions
+      - **Practical and actionable**: Provide immediately implementable solutions
+      - **Cost-aware**: Balance performance with budget considerations
+      - **Compliance-focused**: Explicitly address regulatory requirements
+      - **Clear and well-documented**: Include comments and explanations for complex configurations
+
+      ## **ACTION** 🎯
+      [[action]]
+      ---
+
+      **Success Criteria**: The final deliverable should be production-ready, fully documented, and immediately deployable by a DevOps team with minimal additional configuration.
+    form_fiels:
+      action:
+        multiline: true
+  - trigger: ":k8s-operator-craft"
+    form: |+
+      ## **CONTEXT** 🏢
+      You are developing a **production-grade Kubernetes operator** for a **regulated fintech company** that manages critical workloads and financial data. This operator must achieve:
+      - **Enterprise-grade reliability** with proper error handling and recovery
+      - **Security-first design** with RBAC, admission controllers, and audit logging
+      - **Compliance requirements**: SOC2 Type II, PCI DSS Level 1, and HIPAA compatibility
+      - **Multi-tenant isolation** with namespace-scoped and cluster-scoped resources
+      - **Production readiness** with comprehensive testing, monitoring, and observability
+      - **Performance optimization** for high-throughput environments with thousands of resources
+      The operator will manage mission-critical infrastructure where bugs or security vulnerabilities can result in significant financial penalties, regulatory violations, and customer data exposure.
+
+      ## **ROLE** 👨‍💼
+      Act as a **Senior Certified Kubernetes Administrator (CKA)** with:
+      - **10+ years of Kubernetes** production experience
+      - **Advanced operator development** expertise using Kubebuilder/Operator SDK
+      - **Go programming mastery** with cloud-native patterns and best practices
+      - **Security-focused development** with threat modeling and secure coding practices
+      - **Multi-cluster and multi-tenant** architecture experience
+      - **FinTech industry specialization** with regulatory compliance knowledge
+      - **Testing and observability** expertise for production-grade operators
+
+      ## **FORMAT** 📋
+      Deliver your response in exactly this structure following Go project layout and Kubebuilder conventions:
+
+      ### **1. Project Structure**
+      ```
+      operator/
+      ├── api/v1/
+      │   ├── types.go              # CRD definitions
+      │   ├── zz_generated.deepcopy.go
+      │   └── groupversion_info.go
+      ├── controllers/
+      │   ├── controller.go         # Main controller logic
+      │   ├── controller_test.go    # Unit tests
+      │   └── suite_test.go         # Test suite setup
+      ├── config/
+      │   ├── crd/                  # CRD manifests
+      │   ├── rbac/                 # RBAC configurations
+      │   ├── manager/              # Manager deployment
+      │   └── samples/              # Example resources
+      ├── internal/
+      │   ├── reconciler/           # Reconciliation logic
+      │   ├── webhook/              # Admission webhooks
+      │   └── metrics/              # Custom metrics
+      ├── pkg/
+      │   ├── utils/                # Utility functions
+      │   └── client/               # Client wrappers
+      ├── charts/
+      │   └── operator/
+      │       ├── Chart.yaml        # Helm chart metadata
+      │       ├── values.yaml       # Default configuration values
+      │       ├── values.schema.json # Values validation schema
+      │       └── templates/
+      │           ├── deployment.yaml    # Operator deployment
+      │           ├── rbac.yaml          # Service account & RBAC
+      │           ├── service.yaml       # Webhook service
+      │           ├── webhook.yaml       # Webhook configuration
+      │           ├── serviceMonitor.yaml # Prometheus monitoring
+      │           └── _helpers.tpl       # Template helpers
+      └── main.go                   # Entry point
+      ```
+
+      ### **2. Go Code Files**
+      - **CRD Types** (`api/v1/types.go`) - Custom resource definitions with validation
+      - **Controller Logic** (`controllers/controller.go`) - Reconciliation loop implementation
+      - **Reconciler Package** (`internal/reconciler/`) - Business logic separation
+      - **Webhook Implementation** (`internal/webhook/`) - Admission control logic
+      - **Main Entry Point** (`main.go`) - Operator initialization and configuration
+
+      ### **3. Kubernetes Manifests**
+      - **CRD Manifests** - OpenAPI v3 schema with comprehensive validation
+      - **RBAC Configuration** - Least-privilege service accounts and roles
+      - **Deployment Manifests** - Highly available operator deployment
+      - **NetworkPolicy** - Network isolation and security boundaries
+      - **PodSecurityPolicy/PodSecurityStandards** - Container security constraints
+
+      ### **4. Helm Chart for Operator Deployment**
+      - **Chart.yaml** - Helm chart metadata with version and dependencies
+      - **values.yaml** - Configurable parameters with secure defaults
+      - **values.schema.json** - JSON schema validation for values
+      - **Templates**:
+        - `deployment.yaml` - Operator deployment with resource limits and security context
+        - `rbac.yaml` - ServiceAccount, ClusterRole, and ClusterRoleBinding
+        - `service.yaml` - Service for webhook endpoints
+        - `webhook.yaml` - ValidatingAdmissionWebhook and MutatingAdmissionWebhook
+        - `serviceMonitor.yaml` - Prometheus ServiceMonitor for metrics collection
+        - `_helpers.tpl` - Reusable template functions and labels
+      - **Installation Instructions** - Helm deployment commands and configuration examples
+
+      ### **5. Testing Strategy**
+      - **Unit Tests** - Controller logic with mocked clients
+      - **Integration Tests** - End-to-end with envtest framework
+      - **Performance Tests** - Load testing with multiple resource instances
+      - **Security Tests** - RBAC validation and security scanning
+      - **Helm Chart Tests** - Chart linting, template validation, and installation testing
+
+      ### **6. Documentation**
+      - **API Reference** - Comprehensive CRD documentation
+      - **Operator Guide** - Installation and configuration instructions
+      - **Helm Chart Guide** - Chart values documentation and upgrade procedures
+      - **Troubleshooting Guide** - Common issues and debugging steps
+      - **Security Considerations** - Threat model and security best practices
+
+      ### **7. Observability & Monitoring**
+      - **Custom Metrics** - Prometheus metrics for operator health
+      - **Structured Logging** - JSON logging with correlation IDs
+      - **Health Checks** - Liveness and readiness probes
+      - **Alerting Rules** - Critical operational alerts
+      - **Grafana Dashboards** - Operator performance and health visualizations
+
+      ## **TONE** 🎨
+      - **Technical Excellence**: Demonstrate deep Kubernetes and Go expertise
+      - **Security-Conscious**: Implement security-by-design principles throughout
+      - **Production-Ready**: Focus on reliability, observability, and maintainability
+      - **Performance-Aware**: Consider resource efficiency and scalability
+      - **Compliance-Focused**: Address regulatory requirements in design decisions
+      - **Best Practices**: Follow established patterns and industry standards
+      - **Well-Documented**: Include comprehensive comments and documentation
+      - **Test-Driven**: Emphasize comprehensive testing at all levels
+
+      ## **ACTION** 🎯
+      [[action]]
+      ---
+      **Success Criteria**: The final deliverable should be a production-ready, security-hardened Kubernetes operator that follows Go best practices, includes comprehensive testing, and can be immediately deployed by a platform engineering team with minimal configuration.
+    form_fields:
+      action:
+        multiline: true
+  - trigger: ":helm-chart-craft"
+    form: |
+      ## **CONTEXT** 🏢
+      You are developing **production-grade Helm charts** for a **regulated fintech company** that deploys critical applications processing financial transactions and customer data. These charts must achieve:
+      - **99.9% uptime SLA** (8.76 hours downtime/year max) for deployed applications
+      - **Enterprise-grade security** with RBAC, security contexts, and network policies
+      - **Compliance requirements**: SOC2 Type II, PCI DSS Level 1, and potential HIPAA
+      - **Multi-environment deployment** with environment-specific configurations
+      - **Cost optimization** through resource limits, HPA, and efficient scheduling
+      - **Comprehensive testing** with helm-unittest framework for template validation
+      The client operates in a heavily regulated environment where misconfigurations or security vulnerabilities can result in significant financial penalties and regulatory action.
+
+      ## **ROLE** 👨‍💼
+      Act as a **Senior Certified Kubernetes Administrator (CKA)** with:
+      - **10+ years of Kubernetes** production experience
+      - **Advanced Helm chart development** expertise with complex templating
+      - **FinTech industry specialization** with regulatory compliance knowledge
+      - **Security-first approach** with Pod Security Standards and network isolation
+      - **Testing expertise** using helm-unittest framework for comprehensive coverage
+      - **Multi-cluster deployment** experience across different environments
+      - **GitOps and CI/CD** integration with automated chart testing and deployment
+
+      ## **FORMAT** 📋
+      Deliver your response in exactly this structure:
+
+      ### **Helm Chart Structure**
+      ```
+      chart-name/
+      ├── Chart.yaml                    # Chart metadata and dependencies
+      ├── Chart.lock                    # Dependency lock file
+      ├── values.yaml                   # Default configuration values
+      ├── values.schema.json            # JSON schema for values validation
+      ├── .helmignore                   # Files to ignore during packaging
+      ├── README.md                     # Chart documentation
+      ├── templates/
+      │   ├── _helpers.tpl              # Template helpers and functions
+      │   ├── configmap.yaml            # Configuration management
+      │   ├── secret.yaml               # Secrets management
+      │   ├── serviceaccount.yaml       # Service account definition
+      │   ├── rbac.yaml                 # RBAC permissions
+      │   ├── deployment.yaml           # Application deployment
+      │   ├── service.yaml              # Service definition
+      │   ├── ingress.yaml              # Ingress configuration
+      │   ├── hpa.yaml                  # Horizontal Pod Autoscaler
+      │   ├── networkpolicy.yaml        # Network isolation
+      │   ├── poddisruptionbudget.yaml  # PDB for availability
+      │   └── NOTES.txt                 # Post-installation notes
+      └── tests/
+          ├── deployment_test.yaml      # helm-unittest tests for deployment
+          ├── service_test.yaml         # helm-unittest tests for service
+          ├── configmap_test.yaml       # helm-unittest tests for configmap
+          ├── rbac_test.yaml           # helm-unittest tests for RBAC
+          ├── values_test.yaml         # helm-unittest tests for values validation
+          └── security_test.yaml       # helm-unittest tests for security policies
+      ```
+
+      ### **Required Files**
+      - **Chart.yaml** - Metadata with version, dependencies, and annotations
+      - **values.yaml** - Comprehensive default values with security-first settings
+      - **values.schema.json** - OpenAPI v3 schema for values validation
+      - **_helpers.tpl** - Reusable template functions for labels, selectors, and naming
+      - **All Kubernetes Manifests** - Complete resource definitions with proper templating
+      - **helm-unittest Tests** - Comprehensive test coverage for all templates
+      - **.helmignore** - Exclude unnecessary files from chart package
+      - **README.md** - Installation guide, configuration options, and examples
+
+      ### **helm-unittest Test Structure**
+      Each test file must include:
+      - **Template validation** - Verify correct YAML generation
+      - **Values testing** - Test different configuration scenarios
+      - **Conditional logic** - Test if/else conditions in templates
+      - **Security validation** - Verify security contexts and RBAC
+      - **Resource limits** - Validate resource requests and limits
+      - **Label consistency** - Ensure proper labeling across resources
+      - **Error scenarios** - Test invalid configurations and edge cases
+
+      ### **Security Testing Requirements**
+      - **RBAC validation** - Verify least-privilege permissions
+      - **Security contexts** - Test non-root users and read-only filesystems
+      - **Network policies** - Validate network isolation rules
+      - **Secret handling** - Test secret creation and mounting
+      - **Pod Security Standards** - Compliance with restricted security profile
+
+      ### **Testing Commands**
+      - **Lint Chart**: `helm lint chart-name/`
+      - **Run Tests**: `helm unittest chart-name/`
+      - **Template Validation**: `helm template chart-name/ --debug`
+      - **Dry Run**: `helm install --dry-run --debug chart-name/ chart-name/`
+      - **Schema Validation**: `helm lint --with-subcharts chart-name/`
+
+      ## **TONE** 🎨
+      - **Technical Excellence**: Demonstrate deep Kubernetes and Helm expertise
+      - **Security-Conscious**: Implement security-by-design in all templates
+      - **Test-Driven**: Emphasize comprehensive testing with helm-unittest
+      - **Production-Ready**: Focus on reliability, scalability, and maintainability
+      - **Compliance-Focused**: Address regulatory requirements in configurations
+      - **Cost-Aware**: Optimize resource usage and cluster efficiency
+      - **Best Practices**: Follow Helm chart development standards and conventions
+      - **Well-Documented**: Include comprehensive comments and usage examples
+
+      ## **ACTION** 🎯
+      [[action]]
+      ---
+      **Success Criteria**: The final deliverable should be a production-ready, security-hardened Helm chart with comprehensive helm-unittest test coverage that can be immediately deployed by a platform engineering team across multiple environments with minimal configuration changes.
+    form_fields:
+      action:
+        multiline: true
