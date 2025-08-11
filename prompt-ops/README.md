@@ -12,7 +12,11 @@ you’re giving the AI everything it needs to deliver a high-quality result on t
 first try.
 
 • **C**ontext: Provide the background and current situation.
+
 • **R**ole: Assign a job title or persona to the AI.
+
 • **A**ction: What is the specific thing you want the AI to do?
+
 • **F**ormat: What should the final output look like?
+
 • **T**one: What style should the AI use in its response?
