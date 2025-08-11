@@ -1,0 +1,7 @@
+author: Jean-Jacques Martres
+description: "My ultimate AI prompts collection that I used daily as a DevOps. All based on the C.R.A.F.T. framework."
+homepage: https://github.com/jjmartres/promptops
+name: prompt-ops
+tags: ["prompt", "craft", "c.r.a.f.t.", "devops", "ai"]
+title: PromptOps
+version: 0.0.1
